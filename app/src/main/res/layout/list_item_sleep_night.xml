@@ -31,9 +31,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/ic_sleep_5"
+            app:sleepImage = "@{sleep}"
             android:contentDescription="@string/quality_image_contentDescription" />
-
-<!--        app:sleepImage = "@{sleep}"-->
 
         <TextView
             android:id="@+id/quality_string"
@@ -43,6 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/quality_image"
             app:layout_constraintStart_toStartOf="@id/quality_image"
             app:layout_constraintEnd_toEndOf="@id/quality_image"
+            app:sleepQualityString = "@{sleep}"
             tools:text="@string/five_excellent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

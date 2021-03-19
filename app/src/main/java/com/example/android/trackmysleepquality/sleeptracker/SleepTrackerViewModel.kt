@@ -85,7 +85,7 @@ class SleepTrackerViewModel(
      * This is private because we don't want to expose setting this value to the Fragment.
      */
 
-    private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
+    private val _navigateToSleepQuality: MutableLiveData<SleepNight> = MutableLiveData<SleepNight>()
 
     /**
      * Call this immediately after calling `show()` on a toast.
