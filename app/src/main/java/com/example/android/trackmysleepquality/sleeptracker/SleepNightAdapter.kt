@@ -39,7 +39,6 @@ class SleepNightAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         val res = holder.itemView.context.resources
-        holder.binding.sleepLength.text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, res)
         holder.binding.qualityString.text = convertNumericQualityToString(item.sleepQuality, res)
         holder.binding.qualityImage.setImageResource(when (item.sleepQuality) {
             0 -> R.drawable.ic_sleep_0

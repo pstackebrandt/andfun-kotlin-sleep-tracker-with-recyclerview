@@ -47,7 +47,6 @@
             app:layout_constraintBottom_toTopOf="@id/clear_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
 
         <!-- With data binding and LiveData, we can track the buttons' visibility states
