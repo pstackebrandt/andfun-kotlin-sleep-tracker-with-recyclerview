@@ -16,18 +16,18 @@
 
 package com.example.android.trackmysleepquality.sleeptracker
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.trackmysleepquality.R
-import com.example.android.trackmysleepquality.convertDurationToFormatted
 import com.example.android.trackmysleepquality.convertNumericQualityToString
 import com.example.android.trackmysleepquality.database.SleepNight
 import com.example.android.trackmysleepquality.databinding.ListItemSleepNightBinding
 
-class SleepNightAdapter :
+class SleepNightAdapter(val clickListener: SleepNightListener) :
     ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup,
@@ -49,10 +49,18 @@ class SleepNightAdapter :
             5 -> R.drawable.ic_sleep_5
             else -> R.drawable.ic_sleep_active
         })
+
+        holder.bind(clickListener, getItem(position)!!)
     }
 
     class ViewHolder private constructor(val binding: ListItemSleepNightBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(clickListener: SleepNightListener, item: SleepNight) {
+            binding.sleep = item
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
+        }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
@@ -65,25 +73,31 @@ class SleepNightAdapter :
             }
         }
     }
+}
 
-    class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
-        /**
-         * Called to check whether two objects represent the same item.
-         */
-        override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
-            return oldItem.nightId == newItem.nightId
-        }
-
-        /**
-         * Called to check whether two items have the same data.
-         * This information is used to detect if the contents of an item have changed.
-         *
-         * This method is called only if [.areItemsTheSame] returns `true` for
-         * these items.
-         */
-        override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
-            return oldItem == newItem
-        }
+class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
+    /**
+     * Called to check whether two objects represent the same item.
+     */
+    override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
+        return oldItem.nightId == newItem.nightId
     }
 
+    /**
+     * Called to check whether two items have the same data.
+     * This information is used to detect if the contents of an item have changed.
+     *
+     * This method is called only if [.areItemsTheSame] returns `true` for
+     * these items.
+     */
+    override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class SleepNightListener(val clickListener: (sleepId: Long) -> Unit) {
+    fun onClick(night: SleepNight) {
+        clickListener(night.nightId)
+        Log.i("SleepNightListener", "SleepNightListener onClick")
+    }
 }
