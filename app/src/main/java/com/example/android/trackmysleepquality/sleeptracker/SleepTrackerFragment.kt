@@ -67,6 +67,7 @@ class SleepTrackerFragment : Fragment() {
         // add gridlayout
         val manager = GridLayoutManager(activity, 3)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+
             /**
              * Returns the number of span occupied by the item at `position`.
              *
@@ -93,7 +94,6 @@ class SleepTrackerFragment : Fragment() {
             }
         })
 
-
         // Add an Observer on the state variable for showing a Snackbar message
         // when the CLEAR button is pressed.
         sleepTrackerViewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
@@ -103,6 +103,7 @@ class SleepTrackerFragment : Fragment() {
                     getString(R.string.cleared_message),
                     Snackbar.LENGTH_SHORT // How long to display the message.
                 ).show()
+
                 // Reset state to make sure the snackbar is only shown once, even if the device
                 // has a configuration change.
                 sleepTrackerViewModel.doneShowingSnackbar()
