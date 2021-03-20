@@ -65,11 +65,6 @@ class SleepDetailViewModel(
         get() = _navigateToSleepTracker
 
     /**
-     *
-     */
-
-
-    /**
      * Call this immediately after navigating to [SleepTrackerFragment]
      */
     fun doneNavigating() {
@@ -79,7 +74,6 @@ class SleepDetailViewModel(
     fun onClose() {
         _navigateToSleepTracker.value = true
     }
-
 }
 
  

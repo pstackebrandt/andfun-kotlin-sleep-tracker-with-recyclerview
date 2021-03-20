@@ -42,11 +42,11 @@ import com.example.android.trackmysleepquality.databinding.FragmentSleepDetailBi
 class SleepDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
         // Get a reference to the binding object and inflate the fragment views.
         val binding: FragmentSleepDetailBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_sleep_detail, container, false)
+            inflater, R.layout.fragment_sleep_detail, container, false)
 
         val application = requireNotNull(this.activity).application
         val arguments = SleepDetailFragmentArgs.fromBundle(arguments!!)
@@ -57,8 +57,8 @@ class SleepDetailFragment : Fragment() {
 
         // Get a reference to the ViewModel associated with this fragment.
         val sleepDetailViewModel =
-                ViewModelProvider(
-                        this, viewModelFactory).get(SleepDetailViewModel::class.java)
+            ViewModelProvider(
+                this, viewModelFactory).get(SleepDetailViewModel::class.java)
 
         // To use the View Model with data binding, you have to explicitly
         // give the binding object a reference to it.
@@ -70,7 +70,7 @@ class SleepDetailFragment : Fragment() {
         sleepDetailViewModel.navigateToSleepTracker.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 this.findNavController().navigate(
-                        SleepDetailFragmentDirections.actionSleepDetailFragmentToSleepTrackerFragment())
+                    SleepDetailFragmentDirections.actionSleepDetailFragmentToSleepTrackerFragment())
                 // Reset state to make sure we only navigate once, even if the device
                 // has a configuration change.
                 sleepDetailViewModel.doneNavigating()

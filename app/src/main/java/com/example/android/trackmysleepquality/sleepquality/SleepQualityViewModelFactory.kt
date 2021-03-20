@@ -26,8 +26,9 @@ import com.example.android.trackmysleepquality.database.SleepDatabaseDao
  * Provides the key for the night and the SleepDatabaseDao to the ViewModel.
  */
 class SleepQualityViewModelFactory(
-        private val sleepNightKey: Long,
-        private val dataSource: SleepDatabaseDao) : ViewModelProvider.Factory {
+    private val sleepNightKey: Long,
+    private val dataSource: SleepDatabaseDao) : ViewModelProvider.Factory {
+
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SleepQualityViewModel::class.java)) {

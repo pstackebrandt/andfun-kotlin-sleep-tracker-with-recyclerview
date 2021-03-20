@@ -29,8 +29,8 @@ import kotlinx.coroutines.*
  * @param sleepNightKey The key of the current night we are working on.
  */
 class SleepQualityViewModel(
-        private val sleepNightKey: Long = 0L,
-        val database: SleepDatabaseDao) : ViewModel() {
+    private val sleepNightKey: Long = 0L,
+    val database: SleepDatabaseDao) : ViewModel() {
 
 
     /**
@@ -63,10 +63,6 @@ class SleepQualityViewModel(
         get() = _navigateToSleepTracker
 
     /**
-     *
-     */
-
-    /**
      * Call this immediately after navigating to [SleepTrackerFragment]
      */
     fun doneNavigating() {
@@ -82,9 +78,9 @@ class SleepQualityViewModel(
         viewModelScope.launch {
             // IO is a thread pool for running operations that access the disk, such as
             // our Room database.
-                val tonight = database.get(sleepNightKey) ?: return@launch
-                tonight.sleepQuality = quality
-                database.update(tonight)
+            val tonight = database.get(sleepNightKey) ?: return@launch
+            tonight.sleepQuality = quality
+            database.update(tonight)
 
             // Setting this state variable to true will alert the observer and trigger navigation.
             _navigateToSleepTracker.value = true
